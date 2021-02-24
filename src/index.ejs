@@ -83,7 +83,8 @@
     {
       "imports": {
         "@spa-root/root-config": "//localhost:9000/spa-root-root-config.js",
-        "@spa-react/spa-react": "//localhost:8080/spa-react-spa-react.js"
+        "@spa-react/spa-react": "//localhost:8080/spa-react-spa-react.js",
+        "@spa-angular/spa-angular": "//localhost:4200/main.js"
       }
     }
   </script>
@@ -93,7 +94,7 @@
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
   -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+   <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
   <% if (isLocal) { %>
@@ -131,7 +132,7 @@
                  </h2>
               </route>
               <route path="angular">
-                Angular
+                <application name="@spa-angular/spa-angular"></application>
               </route>
               <route path="/react">
                 <application name="@spa-react/spa-react"></application>
@@ -147,6 +148,7 @@
   <script>
     System.import('@spa-root/root-config');
     System.import('@spa-react/spa-react');
+    System.import('@spa-angular/spa-angular');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
