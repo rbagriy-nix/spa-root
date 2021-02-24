@@ -67,20 +67,23 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+        "react": "https://unpkg.com/react@17/umd/react.production.min.js",
+        "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
       }
     }
   </script>
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
 
   <!-- Add your organization's prod import map URL to this script's src  -->
-  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+<!--   <script type="systemjs-importmap" src="/importmap.json"></script> -->
 
   <% if (isLocal) { %>
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@spa-root/root-config": "//localhost:9000/spa-root-root-config.js"
+        "@spa-root/root-config": "//localhost:9000/spa-root-root-config.js",
+        "@spa-react/spa-react": "//localhost:8080/spa-react-spa-react.js"
       }
     }
   </script>
@@ -130,8 +133,8 @@
               <route path="angular">
                 Angular
               </route>
-              <route path="react">
-                React
+              <route path="/react">
+                <application name="@spa-react/spa-react"></application>
               </route>
             </div>
           </div>
@@ -143,6 +146,7 @@
 <body>
   <script>
     System.import('@spa-root/root-config');
+    System.import('@spa-react/spa-react');
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
 </body>
