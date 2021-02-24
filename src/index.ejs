@@ -21,6 +21,17 @@
 
   <!--  Additional JS-->
   <script>
+    window.onload = function () {
+      const a = document.querySelectorAll('#single-spa-nav li > a')
+      const href = window.location.href
+
+      a.forEach(a => {
+        if (a.href == href) {
+          a.classList.add('active')
+        }
+      })
+    }
+
     function addActiveClass(event) {
       const a = document.querySelectorAll('#single-spa-nav li > a')
       a.forEach(a => a.classList.remove('active'))
