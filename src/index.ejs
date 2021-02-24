@@ -6,6 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Root Config</title>
 
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!--  Additional CSS -->
+  <style>
+    html, body {
+      height:100%;
+    }
+  </style>
+
+  <!--  Additional JS-->
+  <script>
+    function addActiveClass(event) {
+      const a = document.querySelectorAll('#single-spa-nav li > a')
+      a.forEach(a => a.classList.remove('active'))
+
+      event.target.classList.add('active')
+    }
+  </script>
   <!--
     Remove this if you only support browsers that support async/await.
     This is needed by babel to share largeish helper code for compiling async/await in older
@@ -47,7 +69,6 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@single-spa/welcome": "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js",
         "@spa-root/root-config": "//localhost:9000/spa-root-root-config.js"
       }
     }
@@ -71,16 +92,42 @@
 
   <template id="single-spa-layout">
     <single-spa-router>
-      <!-- <nav>
-        <application name="@<%- orgName %>/navbar"></application>
-      </nav> -->
-      <main>
-        <route default>
-          <application name="@single-spa/welcome"></application>
-        </route>
-      </main>
+        <div id="signe-spa-app" class="d-flex flex-column h-100">
+          <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-dark text-warning">
+            <h5 class="">Single-SPA demo</h5>
+          </div>
+          <div class="d-flex" style="flex-grow: 1">
+            <div class="sidebar bg-warning w-100 px-3 d-flex justify-content-center align-items-center" style="max-width: 250px;">
+              <ul id="single-spa-nav" class="nav flex-column nav-pills nav-fill w-100">
+                <li class="nav-item mb-2">
+                  <a class="nav-link btn btn-dark text-warning" href="/" onclick="singleSpaNavigate(event); addActiveClass(event)">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link btn btn-dark text-warning" href="/angular" onclick="singleSpaNavigate(event); addActiveClass(event)">Angular</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link btn btn-dark text-warning " href="/react" onclick="singleSpaNavigate(event); addActiveClass(event)">React</a>
+                </li>
+              </ul>
+            </div>
+            <div class="content w-100 px-3">
+               <route default>
+                 <h2 class="d-flex align-items-center justify-content-center h-100">
+                   It's default root content
+                 </h2>
+              </route>
+              <route path="angular">
+                Angular
+              </route>
+              <route path="react">
+                React
+              </route>
+            </div>
+          </div>
+        </div>
     </single-spa-router>
   </template>
+
 </head>
 <body>
   <script>
